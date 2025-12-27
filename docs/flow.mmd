@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant Store
+    participant Transfer
+    participant Entry
+    participant Account
+
+    Note over Store: João quer enviar R$100 para Maria
+    
+    Store->>Transfer: Cria Transfer (João → Maria, R$100)
+    Transfer-->>Store: Transfer criada ✓
+    
+    Store->>Entry: Cria Entry (João, -R$100)
+    Entry-->>Store: Entry débito criada ✓
+    
+    Store->>Entry: Cria Entry (Maria, +R$100)
+    Entry-->>Store: Entry crédito criada ✓
+    
+    Store->>Account: Atualiza saldo João (-R$100)
+    Account-->>Store: Saldo atualizado ✓
+    
+    Store->>Account: Atualiza saldo Maria (+R$100)
+    Account-->>Store: Saldo atualizado ✓
+    
+    Note over Store: Transferência completa!
