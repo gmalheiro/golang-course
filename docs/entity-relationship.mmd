@@ -1,0 +1,27 @@
+erDiagram
+    ACCOUNT {
+        bigserial id PK
+        varchar owner
+        bigint balance
+        varchar currency
+        timestamptz created_at
+    }
+    
+    ENTRY {
+        bigserial id PK
+        bigint account_id FK
+        bigint amount "pode ser + ou -"
+        timestamptz created_at
+    }
+    
+    TRANSFER {
+        bigserial id PK
+        bigint from_account_id FK
+        bigint to_account_id FK
+        bigint amount "sempre positivo"
+        timestamptz created_at
+    }
+    
+    ACCOUNT ||--o{ ENTRY : "tem muitas"
+    ACCOUNT ||--o{ TRANSFER : "envia (from)"
+    ACCOUNT ||--o{ TRANSFER : "recebe (to)"
